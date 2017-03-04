@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+            jxb:version="2.0">
+    <xsd:element name="Person" type="PersonType"/>
+    <xsd:complexType name="PersonType">
+        <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string"/>
+            <xsd:element name="Surname" type="xsd:string"/>
+            <xsd:element name="Pesel">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[0-9]{11}"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="Email">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[.a-zA-Z0-9_+-]+@[.a-zA-Z0-9_+-]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="Car" type="CarType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="UnregisteredCar" type="CarType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="Address" type="AddressType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CarType">
+        <xsd:sequence>
+            <xsd:element name="Type" type="xsd:string"/>
+            <xsd:element name="VIN">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[0-9A-HJ-NPR-Z]{17}"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="RegistrationDate" type="xsd:date"/>
+            <xsd:element name="DocumentNumber" type="xsd:string"/>
+            <xsd:element name="ValidUntil" type="xsd:date"/>
+            <xsd:element name="RegistrationNumber">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[A-Z]{2,3} ?[A-Z0-9]{4,5}"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="AddressType">
+        <xsd:sequence>
+            <xsd:element name="Number" type="xsd:unsignedInt"/>
+            <xsd:element name="Street" type="xsd:string"/>
+            <xsd:element name="PostalCode">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[0-9]{2}-[0-9]{3}"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="City" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>
